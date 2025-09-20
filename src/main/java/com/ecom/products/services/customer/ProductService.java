@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomerProductservice {
+public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public CustomerProductservice(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

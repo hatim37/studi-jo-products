@@ -1,5 +1,6 @@
 package com.ecom.products.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ public class ProductDto {
     private Long price;
     private String description;
     private byte[] byteImg;
+    @JsonIgnore
     private MultipartFile img;
     private Long quantity;
 }

@@ -1,7 +1,7 @@
 package com.ecom.products.controller;
 
 import com.ecom.products.dto.ProductDto;
-import com.ecom.products.services.customer.CustomerProductservice;
+import com.ecom.products.services.customer.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,9 +12,9 @@ import java.util.List;
 public class
 ProductController {
 
-    private final CustomerProductservice customerProductservice;
+    private final ProductService customerProductservice;
 
-    public ProductController(CustomerProductservice customerProductservice) {
+    public ProductController(ProductService customerProductservice) {
         this.customerProductservice = customerProductservice;
     }
 
