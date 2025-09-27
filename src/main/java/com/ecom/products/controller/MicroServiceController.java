@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class MicroServiceController {
 
@@ -19,9 +20,14 @@ public class MicroServiceController {
         this.productService = productService;
     }
 
+    @GetMapping("/_internal/productFindById/{id}")
+    public Product findById(@PathVariable Long id){
+        return this.productService.findById(id);
+    }
+
     @PostMapping("/_internal/productFindListById")
     public ResponseEntity<List<ProductDto>> findListById(@RequestBody List<Long> ids) {
-       return productService.findListById(ids);
+        return productService.findListById(ids);
     }
 
 }

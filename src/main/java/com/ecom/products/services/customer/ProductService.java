@@ -25,6 +25,10 @@ public class ProductService {
         return products.stream().map(Product::getDto).collect(Collectors.toList());
     }
 
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
     public ResponseEntity<List<ProductDto>> findListById(List<Long> ids) {
         List<Product> products = productRepository.findAllById(ids);
         List<ProductDto> result = products.stream()
