@@ -16,7 +16,7 @@ FROM eclipse-temurin:17-jre-jammy
 #
 WORKDIR /app
 #
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/app.jar app.jar
 #
 EXPOSE 8080
 # commande qui sera executé lors du lancement du container
