@@ -37,7 +37,7 @@ public class ConfigurationSecurityApplication {
         http
                 .securityMatcher("/_internal/**" )
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
