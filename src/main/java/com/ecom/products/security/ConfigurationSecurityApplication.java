@@ -65,26 +65,13 @@ public class ConfigurationSecurityApplication {
         return http.build();
     }
 
-    /*@Bean
-    CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration configuration =new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }*/
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Autoriser uniquement l'origine Angular
         configuration.setAllowedOrigins(Arrays.asList("https://studi-jo-angular-285073083479.europe-west1.run.app"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        //configuration.setAllowCredentials(true); // Important si tu utilises cookies ou headers d'auth
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
