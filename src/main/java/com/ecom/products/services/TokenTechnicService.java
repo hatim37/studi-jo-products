@@ -30,7 +30,7 @@ public class TokenTechnicService {
 
     public String getTechnicalToken() {
         // 1) Calcul du header Basic
-        String creds = "security-service:mySuperSecret";
+        String creds = clientId+":"+clientSecret;
         String basicAuth = "Basic " +
                 Base64.getEncoder().encodeToString(
                         creds.getBytes(StandardCharsets.UTF_8)
