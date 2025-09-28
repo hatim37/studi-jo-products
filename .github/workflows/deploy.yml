@@ -39,7 +39,6 @@ jobs:
             --service-account "$SERVICE_ACCOUNT_EMAIL" \
             --update-secrets RSA_PUBLIC_KEY=SECRET_KEY_PUBLIC:latest \
             --add-cloudsql-instances "$CLOUDSQL_INSTANCE" \
-            --set-env-vars SPRING_PROFILES_ACTIVE=cloud \
             --timeout=300
 
       - name: Afficher l’URL du service
