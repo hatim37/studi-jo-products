@@ -37,7 +37,7 @@ public class ConfigurationSecurityApplication {
         http
                 .securityMatcher("/_internal/**" )
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(Customizer.withDefaults())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -53,7 +53,7 @@ public class ConfigurationSecurityApplication {
             HttpSecurity http, @Qualifier("userJwtDecoder") JwtDecoder userJwtDecoder) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/products").permitAll()
                         .anyRequest().authenticated()
