@@ -53,7 +53,8 @@ public class ConfigurationSecurityApplication {
             HttpSecurity http, @Qualifier("userJwtDecoder") JwtDecoder userJwtDecoder) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                //.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/products").permitAll()
                         .anyRequest().authenticated()
@@ -65,8 +66,19 @@ public class ConfigurationSecurityApplication {
         return http.build();
     }
 
-
     @Bean
+    CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration configuration =new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("https://studi-jo-angular-285073083479.europe-west1.run.app"));
@@ -75,6 +87,6 @@ public class ConfigurationSecurityApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 
 }
