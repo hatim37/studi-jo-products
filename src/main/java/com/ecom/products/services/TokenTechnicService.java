@@ -15,8 +15,6 @@ import java.util.Base64;
 @Service
 public class TokenTechnicService {
 
-
-
     private final SecurityRestClient securityRestClient;
     @Value("${CLIENT_ID}")
     private  String clientId;
@@ -29,7 +27,7 @@ public class TokenTechnicService {
 
 
     public String getTechnicalToken() {
-        // 1) Calcul du header Basic
+        // 1) generate du header Basic
         String creds = clientId+":"+clientSecret;
         String basicAuth = "Basic " +
                 Base64.getEncoder().encodeToString(
@@ -37,12 +35,10 @@ public class TokenTechnicService {
                 );
 
         // 2) Construction manuelle du corps form-url-encoded
-
         String form = "grant_type=client_credentials&scope=users:read";
 
         // 3) Appel Feign
         TokenTechnicDto resp = securityRestClient.getTokenTechnic(basicAuth, form);
-        log.info(resp.accessToken());
         // 4) Retourne l’access_token (ou null si fallback)
         return resp == null ? null : resp.accessToken();
     }

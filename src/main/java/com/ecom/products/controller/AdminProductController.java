@@ -47,6 +47,7 @@ public class AdminProductController {
 
 
     @GetMapping("/product/{productId}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId) {
         ProductDto productDto = productService.getProductById(productId);
         if (productDto != null) {
@@ -57,6 +58,7 @@ public class AdminProductController {
     }
 
     @PutMapping("/product/{productId}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId, @ModelAttribute ProductDto productDto) throws IOException {
         ProductDto updateProduct = productService.updateProduct(productId, productDto);
         if (updateProduct != null) {
