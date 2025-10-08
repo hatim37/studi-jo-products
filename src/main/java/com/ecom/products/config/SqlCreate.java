@@ -1,37 +1,28 @@
-package com.ecom.products;
+package com.ecom.products.config;
 
-import com.ecom.products.config.RsakeysConfig;
 import com.ecom.products.entity.Product;
 import com.ecom.products.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-
 @Slf4j
-@SpringBootApplication
-@EnableFeignClients
-@EnableConfigurationProperties(RsakeysConfig.class)
-public class ProductsApplication {
+@Component
+@RequiredArgsConstructor
+public class SqlCreate {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProductsApplication.class, args);
-    }
+    private final ProductRepository productRepository;
 
-    @Bean
-    @Profile("!test")
-    CommandLineRunner commandLineRunner(ProductRepository productRepository) {
-        return args -> {
-
+        @EventListener(ApplicationReadyEvent.class)
+        public void onApplicationReady() throws URISyntaxException, IOException {
             byte[] Image = Files.readAllBytes(
                     Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("images/JO-Paris-2024.jpg")).toURI()));
 
@@ -86,7 +77,6 @@ public class ProductsApplication {
             } catch (Exception e) {
                 log.info(String.valueOf(e));
             }
+        }
 
-    };
-}
 }
