@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 
-@Slf4j
 @SpringBootApplication
 @EnableFeignClients
 @EnableConfigurationProperties(RsakeysConfig.class)
@@ -27,7 +26,7 @@ public class ProductsApplication {
         SpringApplication.run(ProductsApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     @Profile("!test")
     CommandLineRunner commandLineRunner(ProductRepository productRepository) {
         return args -> {
@@ -88,5 +87,6 @@ public class ProductsApplication {
             }
 
     };
-}
+    }*/
+
 }

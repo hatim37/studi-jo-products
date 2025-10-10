@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 @Slf4j
 @Service
@@ -25,9 +26,10 @@ public class ProductService {
         return products.stream().map(Product::getDto).collect(Collectors.toList());
     }
 
-    public Product findById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
+
 
     public ResponseEntity<List<ProductDto>> findListById(List<Long> ids) {
         List<Product> products = productRepository.findAllById(ids);

@@ -2,13 +2,13 @@ package com.ecom.products.controller;
 
 import com.ecom.products.dto.ProductDto;
 import com.ecom.products.entity.Product;
-import com.ecom.products.repository.ProductRepository;
 import com.ecom.products.services.customer.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -21,7 +21,7 @@ public class MicroServiceController {
     }
 
     @GetMapping("/_internal/productFindById/{id}")
-    public Product findById(@PathVariable Long id){
+    public Optional<Product> findById(@PathVariable Long id){
         return this.productService.findById(id);
     }
 
